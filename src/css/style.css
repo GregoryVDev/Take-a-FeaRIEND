@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities; */
 
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.index-header {
+    display: flex;
+    background-color: black;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.main-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 150px;
+    list-style: none;
+    color: aliceblue;
+}
+
+
 .full-box {
     display: flex;
     flex-direction: column;
