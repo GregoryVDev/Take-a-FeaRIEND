@@ -35,3 +35,35 @@
 
     }
 } -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    <title>Take a FeaRIEND</title>
+</head>
+<body>
+    <header class="index-header">
+        <img src="/img/logosite.png" height="70px" alt="">
+        <nav >
+            <ul class="main-nav">
+                <li><a href="">Accueil</a></li>
+                <li><a href="">Catégories</a></li>
+                <li><a href="">A propos</a></li>
+            </ul>
+        </nav>
+        <div class="header-btn">
+            <button class="btnlog"><a class="btnloga" href="inscription.php">Connexion S'inscrire</a></button>
+        </div>
+    </header>
+
+    <div class="bannerOffice"></div>
+
+</body>
+</html>

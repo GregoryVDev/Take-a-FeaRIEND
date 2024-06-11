@@ -7,10 +7,10 @@
     margin: 0;
     box-sizing: border-box;
 }
-
+/*START NavBAR*/
 .index-header {
     display: flex;
-    background-color: black;
+    background-color: #1e1e1e;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -22,10 +22,89 @@
     justify-content: space-between;
     gap: 150px;
     list-style: none;
-    color: aliceblue;
+}
+
+.main-nav li a{
+    color: rgb(255, 255, 255);
+    font-family: robotoBold;
+    font-size: 30px;
+    text-decoration: none;
+}
+
+.header-btn {
+    margin-right: 50px;
+}
+.btnlog {
+    font-family: robotoMed;
+    border: none;
+    border-radius: 15px;
+    background-color: #e0a800;
+    border: 2px solid #e0a800;
+    color: #ffffff;
+    font-size: 16px;
+    width: 120px;
+    height: 50px;
+    cursor: pointer;
+}
+.btnloga {
+    text-decoration: none;
+    color: #ffffff;
+}
+/*END NavBAR*/
+
+/*START SECTION INTRO*/
+.intro {
+    background-image: url(/img/Godzilla.png);
+    background-size: cover;
+    height: 1200px;
+}
+.text-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    padding-top: 550px;
+    padding-right: 180px;
+}
+.title {
+    font-family: roadRage;
+    color: white;
+    font-size: 100px;
+}
+.text-content{
+    padding-left: 15px;
+    max-width: 450px;
+    text-align: start;
+    font-family: robotoMed;
+    font-size: 30px;
+    color: white;
+}
+.sub-title {
+    font-family: roadRage;
+    font-size: 38px;
+}
+.text-content2 {
+    font-family: robotoMed;
+    color: white;
+    font-size: 10px;
+    padding-left: 15px;
+}
+/*END SECTION INTRO*/
+
+/*START BACK OFFICE ADMIN*/
+.bannerOffice {
+    background-image: url(/img/panel-admin.png);
+    background-position: top -100px right 0px;
+    height: 300px;
 }
 
 
+/*END BACK OFFICE ADMIN*/
+
+
+
+
+
+/*START SUBSCRIBE LOGIN*/
 .full-box {
     display: flex;
     flex-direction: column;
@@ -53,4 +132,4 @@
     height: 100vh;
     width: 100vh;
 }
-
+/*END SUBSCRIBE LOGIN*/
