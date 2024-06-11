@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/produits/produits.css">
     <link rel="stylesheet" href="./css/produits/produitsresponsive.css">
-
     <title>Nos produits</title>
 </head>
 
