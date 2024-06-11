@@ -2,8 +2,7 @@
 @tailwind components;
 @tailwind utilities; */
 
-
-body {
+.full-box {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,11 +14,14 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
-
+.font-take {
+    font-family: roadRage;
+    color: white;
+    font-size: 100px;
+}
 .sub-box {
     width: 300px;
 }
-
 .img-box {
     background-image: url(/img/login.png);
     background-position: center;
