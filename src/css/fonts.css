@@ -2,3 +2,13 @@
     font-family: roadRage;
     src: url(/fonts/RoadRage\ Rob.ttf);
     }
+
+@font-face {
+    font-family: robotoBold;
+    src: url(/fonts/Roboto-Bold.ttf);
+    }
+
+@font-face {
+    font-family: robotoMed;
+    src: url(/fonts/Roboto-Medium.ttf);
+    }
