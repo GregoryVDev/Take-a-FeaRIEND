@@ -64,6 +64,38 @@
     </header>
 
     <div class="bannerOffice"></div>
+    <section class="add-panel">
+
+
+    <div class="card">
+        <form method="POST" class="form">
+            <div class="left-column">
+                <div class="form-group">
+                    <label for="name">Nom</label>
+                    <input type="text" name="name" id="name" placeholder="Nom">
+                </div>
+                <div class="form-group">
+                    <label for="category">Catégorie</label>
+                    <select name="category" id="category">
+                        <option value="animaux domestiques">Animaux domestiques</option>
+                        <option value="animaux de sécurités">Animaux de sécurités</option>
+                        <option value="animaux dangeureux">Animaux dangeureux</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="content">Description</label>
+                    <textarea name="content" id="content" placeholder="Description"></textarea>
+                </div>
+            </div>
+            <div class="right-column">
+                <div class="upload-box">
+                    <button type="button" class="upload-btn">Upload</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    </section>
 
 </body>
 </html>
