@@ -19,7 +19,7 @@ services:
             MYSQL_USER: test
             MYSQL_PASSWORD: test
         volumes:
-            - "./db:/docker-entrypoint-initdb.d" # création de la table et insertion des données à partir du fichier users.sql
+            - "./db:/docker-entrypoint-initdb.d"
         ports:
             - "3308:3306"
     phpma:
