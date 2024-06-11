@@ -18,7 +18,7 @@ services:
             MYSQL_DATABASE: feaRIEND_crud
             MYSQL_USER: test
             MYSQL_PASSWORD: test
-            volumes:
+        volumes:
             - "./db:/docker-entrypoint-initdb.d" # création de la table et insertion des données à partir du fichier users.sql
         ports:
             - "3308:3306"
