@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/produits/produits.css">
+    <link rel="stylesheet" href="./css/produits/produitsresponsive.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/fonts.css">
+
+    <title>Nos produits</title>
+</head>
+
+<body>
+
+    <main>
+        <header>
+            <div class="logo">
+                <img src="./img/logosite.png" alt="Logo Take a FeaRIEND">
+            </div>
+            <nav id="nav">
+                <ul>
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#">Catégories</a></li>
+                    <li><a href="#">A propos</a></li>
+                    <li><button class="Login">Login</button></li>
+                </ul>
+                <div id="burger">
+                    <img src="./img/burger-bar.png" alt="Menu Burger" width="100%">
+                </div>
+            </nav>
+        </header>
+
+    </main>
+
+</body>
+<script src="./js/script.js"></script>
+
+</html>
