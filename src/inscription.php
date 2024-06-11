@@ -104,9 +104,9 @@
                 <input type="checkbox" value="remember-me"> Remember me
                 </label>
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Connexion</button>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">S'enregistrer</button>
         <hr class="my-4">
-        <small class="text-body-secondary">Si vous possédez déjà un compte cliquer <a href="">connecter</a>.</small>
+        <small class="text-body-secondary">Si vous possédez déjà un compte cliquer sur <a href="ConnexionUser.php">Connexion</a>.</small>
     </form>
 
 
