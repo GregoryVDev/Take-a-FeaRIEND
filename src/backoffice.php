@@ -65,8 +65,6 @@
 
     <div class="bannerOffice"></div>
     <section class="add-panel">
-
-
     <div class="card">
         <form method="POST" class="form">
             <div class="left-column">
@@ -80,6 +78,7 @@
                         <option value="animaux domestiques">Animaux domestiques</option>
                         <option value="animaux de sécurités">Animaux de sécurités</option>
                         <option value="animaux dangeureux">Animaux dangeureux</option>
+                        <option value="Happy tree Friends">Happy tree Friends</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -94,7 +93,7 @@
             </div>
         </form>
     </div>
-
+    zfhzihf
     </section>
 
 </body>
