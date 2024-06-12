@@ -42,6 +42,14 @@
     display: none;
   }
 
+  nav.active .container-button-li {
+    padding: 0;
+  }
+
+  .container-li {
+    display: flex;
+  }
+
   nav a {
     font-size: 0.9rem;
     display: inline-block;
@@ -84,7 +92,21 @@
   }
 
   nav {
-    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .container-li {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .container-button-li {
+    margin-left: auto;
   }
 
   nav ul {
@@ -96,7 +118,6 @@
     width: 100%;
     background: none;
     gap: 15px;
-    margin-left: 10px;
   }
 
   nav ul:hover {
@@ -112,14 +133,8 @@
     background: none;
   }
 
-  nav.active ul nav li {
-    list-style: none;
-    padding: 5px 0;
-    display: none;
-  }
-
   nav a {
-    font-size: 0.9rem;
+    font-size: 1.6rem;
     display: inline-block;
     position: relative;
     text-decoration: none;

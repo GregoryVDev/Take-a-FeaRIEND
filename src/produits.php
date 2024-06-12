@@ -20,13 +20,17 @@
             </div>
             <nav id="nav">
                 <ul>
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="#">Catégories</a></li>
-                    <li><a href="#">A propos</a></li>
-                    <li><button class="Login">Login</button></li>
+                    <div class="container-li">
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#">Catégories</a></li>
+                        <li><a href="#">A propos</a></li>
+                    </div>
+                    <div class="container-button-li">
+                        <li><button class="Login">Login</button></li>
+                    </div>
                 </ul>
                 <div id="burger">
-                    <img src="./img/burger-bar.png" alt="Menu Burger" width="100%">
+                    <img src="./img/burger-bar.png" alt="Menu Burger">
                 </div>
             </nav>
         </header>
