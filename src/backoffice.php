@@ -2,49 +2,58 @@
 
 session_start();
 
-require_once("./connect.php");
+require_once("connect.php");
 
+// Récupérer tous les enregistrements de la table "animaux"
 $sql = "SELECT * FROM animaux";
-
 $query = $db->prepare($sql);
-
 $query->execute();
-
 $result = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 <?php
 if ($_POST) {
     if (
         isset($_POST["name"]) &&
         isset($_POST["content"]) &&
         isset($_POST["category"]) &&
-        isset($_POST["price"]) &&
-        isset($_POST["promotion"])
+        isset($_POST["price"])
     ) {
-
-        require_once("connect.php");
-
+        // Sécuriser les données d'entrée
         $name = strip_tags($_POST["name"]);
         $content = strip_tags($_POST["content"]);
         $category = strip_tags($_POST["category"]);
         $price = strip_tags($_POST["price"]);
-        $discount = strip_tags($_POST["promotion"]);
+        $discount = isset($_POST["discount"]) ? 1 : 0;
 
+        // Gérer l'image
+        $images = "";
+        if (isset($_FILES["image"]) && $_FILES["image"]["error"] == UPLOAD_ERR_OK) {
+            $imageTmpName = $_FILES["image"]["tmp_name"];
+            $imageName = basename($_FILES["image"]["name"]);
+            $imagePath = "uploads/" . $imageName;
 
-        $sql = "INSERT INTO animaux (name, content, category, price, promotion ) VALUES (:name, :content, :category, :price, :promotion)";
+            if (move_uploaded_file($imageTmpName, $imagePath)) {
+                $images = $imagePath;
+            }
+        }
 
+        // Insérer les données dans la table "animaux"
+        $sql = "INSERT INTO animaux (name, content, category, price, discount, images) VALUES (:name, :content, :category, :price, :discount, :images)";
         $query = $db->prepare($sql);
 
         $query->bindValue(":name", $name);
         $query->bindValue(":content", $content);
         $query->bindValue(":category", $category);
         $query->bindValue(":price", $price);
-        $query->bindValue(":promotion", $promotion);
+        $query->bindValue(":discount", $discount);
+        $query->bindValue(":images", $images);
 
         $query->execute();
 
-        require_once("./close.php");
+        require_once("close.php");
 
+        // Rediriger vers la page backoffice après l'insertion
         header("Location: backoffice.php");
         exit();
     } else {
@@ -53,6 +62,8 @@ if ($_POST) {
     }
 }
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -76,7 +87,7 @@ if ($_POST) {
     <div class="bannerOffice"></div>
     <section class="add-panel">
         <div class="card-add">
-            <form method="POST" class="form">
+            <form method="POST" class="form" enctype="multipart/form-data">
                 <div class="left-column">
                     <div class="form-groupcard">
                         <label for="name">Nom:</label>
@@ -84,14 +95,14 @@ if ($_POST) {
                     </div>
                     <div class="form-groupcard">
                         <label for="price">Prix:</label>
-                        <input type="text" name="price" id="price" placeholder="price" required>
+                        <input type="text" name="price" id="price" placeholder="Prix" required>
                     </div>
                     <div class="form-groupcard">
                         <label for="category">Catégorie:</label>
                         <select name="category" id="category" required>
                             <option value="animaux domestiques">Animaux domestiques</option>
                             <option value="animaux de sécurités">Animaux de sécurités</option>
-                            <option value="animaux dangeureux">Animaux dangeureux</option>
+                            <option value="animaux dangereux">Animaux dangereux</option>
                             <option value="Happy tree Friends">Happy tree Friends</option>
                         </select>
                     </div>
@@ -108,11 +119,11 @@ if ($_POST) {
                     <div class="upload-box">
                         <label for="image" class="upload-btn">Upload</label>
                         <input type="file" name="image" id="image" accept="image/*" style="display: none;">
-
                     </div>
                 </div>
                 <button type="submit" class="upload-btn" name="btn-add">
                     <img src="/img/icons/green-add-button-12023.png" alt="">
+                </button>
             </form>
         </div>
         <div class="Admin-title">
@@ -121,7 +132,6 @@ if ($_POST) {
         </div>
     </section>
     <!-- END PANEL AJOUT PRODUITS -->
-
 
     <!-- START TABLEAU ADMINISTRATEUR -->
     <section>
@@ -147,36 +157,15 @@ if ($_POST) {
                             <tbody>
                                 <tr>
                                     <td>
-                                        <button class="btn btn-primary btn-sm"> <a href="detail.php?id=<?= $animaux["id"] ?>"></a>Voir</button>
-                                        <button class="btn btn-warning btn-sm"><a href="edit.php?id=<?= $animaux["id"] ?>"></a>Modifier</button>
-                                        <button class="btn btn-danger btn-sm"> <a href="delete.php?id=<?= $animaux["id"] ?>"></a>Supprimer</button>
+                                        <button class="btn btn-primary btn-sm"><a href="detail.php?id=<?= $animaux["id"] ?>">Voir</a></button>
+                                        <button class="btn btn-warning btn-sm"><a href="edit.php?id=<?= $animaux["id"] ?>">Modifier</a></button>
+                                        <button class="btn btn-danger btn-sm"><a href="delete.php?id=<?= $animaux["id"] ?>">Supprimer</a></button>
                                     </td>
+                                    <td><?= $animaux['id'] ?></td>
                                     <td><?= $animaux['name'] ?></td>
-                                    <td><?= $animaux['content'] ?></td>
                                     <td><?= $animaux['category'] ?></td>
                                     <td><?= $animaux['price'] ?></td>
-                                    <td><?= $animaux['discount'] ?></td>
-                                    <!-- <button class="btn btn-primary btn-sm">Voir</button>
-                                    <button class="btn btn-warning btn-sm">Modifier</button>
-                                    <button class="btn btn-danger btn-sm">Supprimer</button>
-                                </td>
-                                <td>1</td>
-                                <td>Produit A</td>
-                                <td>Catégorie 1</td>
-                                <td>100€</td>
-                                <td><input type="checkbox" class="form-check-input"></td> -->
-                                </tr>
-                                <tr>
-                                    <!-- <td>
-                                    <button class="btn btn-primary btn-sm">Voir</button>
-                                    <button class="btn btn-warning btn-sm">Modifier</button>
-                                    <button class="btn btn-danger btn-sm">Supprimer</button>
-                                </td>
-                                <td>2</td>
-                                <td>Produit B</td>
-                                <td>Catégorie 2</td>
-                                <td>200€</td>
-                                <td><input type="checkbox" class="form-check-input"></td> -->
+                                    <td><?= $animaux['discount'] ? 'Oui' : 'Non' ?></td>
                                 </tr>
                             </tbody>
                         <?php endforeach; ?>
