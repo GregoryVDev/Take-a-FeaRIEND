@@ -102,91 +102,100 @@
     display: flex;
     justify-content: center;
     margin-top: -50px;
+    gap: 150px;
 }
 
-.card {
-  display: flex;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: #fff;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 600px;
+.card-add {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 700px;
+    font-family: robotoMed;
 }
 
 .form {
-  display: flex;
-  width: 100%;
+    display: flex;
+    width: 100%;
+    gap: 20px;
 }
 
 .left-column {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
+.form-groupcard {
+    display: flex;
+    flex-direction: column;
 }
 
 label {
-  margin-bottom: 5px;
-  font-weight: bold;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 input[type="text"],
 select,
 textarea {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 14px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
 }
 
 textarea {
-  width: 100%;
-  height: 150px;
-  resize: none;
+    width: 100%;
+    height: 150px;
+    resize: none;
+}
+
+.promotion-checkbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .right-column {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .upload-box {
-  border: 2px dashed #ccc;
-  border-radius: 10px;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .upload-btn {
-  background-color: #1e1e1e;
-  color: #e0a800;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 16px;
+    background-color: #1e1e1e;
+    color: #e0a800;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 .upload-btn:hover {
-  background-color: #e0a800;
-  color: #1e1e1e;
+    background-color: #e0a800;
+    color: #1e1e1e;
 }
 
 .bannerOffice {
-  background-image: url(/img/panel-admin.png);
-  background-position: top -100px right 0px;
-  height: 300px;
+    background-image: url(/img/panel-admin.png);
+    background-position: top -100px right 0px;
+    height: 300px;
 }
 
 textarea {
@@ -201,8 +210,38 @@ textarea {
 }
 
 textarea::placeholder {
-  color: #999;
-  font-style: italic;
+    color: #999;
+    font-style: italic;
+}
+
+.Admin-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-family: roadRage;
+    font-size: 50px;
+    color: rgb(206, 0, 0);
+}
+
+.btn-add {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: none;
+}
+
+.dashboard {
+    padding-top: 80px;
+}
+
+.admin-board {
+    font-family: robotoMed;
 }
 
 /*END BACK OFFICE ADMIN*/
