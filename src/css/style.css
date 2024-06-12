@@ -175,17 +175,20 @@ textarea {
 }
 
 .upload-btn {
-  background-color: #1e1e1e;
   color: #e0a800;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
   font-size: 16px;
+  background-color: white;
+}
+
+.upload-btn:focus {
+  background: white;
 }
 
 .upload-btn:hover {
-  background-color: #e0a800;
   color: #1e1e1e;
 }
 
@@ -271,40 +274,37 @@ textarea::placeholder {
   height: 100vh;
   width: 100vh;
 }
+
 /*END SUBSCRIBE LOGIN*/
 
-
 /*START FOOTER*/
-body {
-    background-color: #212529;
-    color: #fff;
-}
+
 .footer-style {
-    background-color: #212529;
-    color: #fff;
+  background-color: #212529;
+  color: #fff;
 }
 .footer-style a {
-    color: #fff;
+  color: #fff;
 }
 .footer-style .title-footer {
-    text-decoration: underline;
-    font-family: robotoBold;
-    color: #ff9b06;
+  text-decoration: underline;
+  font-family: robotoBold;
+  color: #ff9b06;
 }
 .footer-style .border-top {
-    border-top: 1px solid #444;
+  border-top: 1px solid #444;
 }
 .footer-content {
-    text-align: center;
-    font-family: robotoMed;
+  text-align: center;
+  font-family: robotoMed;
 }
 .TaF-footer {
-    color: rgb(255, 255, 255);
-    font-family: roadRage;
-    font-size: 40px;
+  color: rgb(255, 255, 255);
+  font-family: roadRage;
+  font-size: 40px;
 }
 .footer-link a:hover {
-    color: white; /* Couleur du texte au survol */
-    text-decoration: none; /* Supprimer le soulignement au survol */
+  color: white; /* Couleur du texte au survol */
+  text-decoration: none; /* Supprimer le soulignement au survol */
 }
 /*END FOOTER*/

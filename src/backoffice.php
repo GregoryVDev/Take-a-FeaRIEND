@@ -1,23 +1,58 @@
 <?php
 
+session_start();
+
+require_once("./connect.php");
+
+$sql = "SELECT * FROM animaux";
+
+$query = $db->prepare($sql);
+
+$query->execute();
+
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
+?>
+<?php
 if ($_POST) {
     if (
-        isset ($_POST["name"]) &&
+        isset($_POST["name"]) &&
         isset($_POST["content"]) &&
         isset($_POST["category"]) &&
         isset($_POST["price"]) &&
-        isset($_POST["discount"]) &&
-        isset($_POST["content"])
-        isset($_POST["content"])
+        isset($_POST["promotion"])
     ) {
 
+        require_once("connect.php");
+
+        $name = strip_tags($_POST["name"]);
+        $content = strip_tags($_POST["content"]);
+        $category = strip_tags($_POST["category"]);
+        $price = strip_tags($_POST["price"]);
+        $discount = strip_tags($_POST["promotion"]);
+
+
+        $sql = "INSERT INTO animaux (name, content, category, price, promotion ) VALUES (:name, :content, :category, :price, :promotion)";
+
+        $query = $db->prepare($sql);
+
+        $query->bindValue(":name", $name);
+        $query->bindValue(":content", $content);
+        $query->bindValue(":category", $category);
+        $query->bindValue(":price", $price);
+        $query->bindValue(":promotion", $promotion);
+
+        $query->execute();
+
+        require_once("./close.php");
+
+        header("Location: backoffice.php");
+        exit();
+    } else {
+        var_dump($_POST);
+        die("marche pas");
     }
 }
-
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +64,7 @@ if ($_POST) {
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/fonts.css">
     <link rel="stylesheet" href="./css/produits/produits.css">
-    <link rel="stylesheet" href="./css/produits/produitsresponsive.css">
+    <link rel="stylesheet" href="./css/produits/produits-responsive.css">
     <title>Take a FeaRIEND</title>
 </head>
 
@@ -45,11 +80,15 @@ if ($_POST) {
                 <div class="left-column">
                     <div class="form-groupcard">
                         <label for="name">Nom:</label>
-                        <input type="text" name="name" id="name" placeholder="Nom">
+                        <input type="text" name="name" id="name" placeholder="Nom" required>
+                    </div>
+                    <div class="form-groupcard">
+                        <label for="price">Prix:</label>
+                        <input type="text" name="price" id="price" placeholder="price" required>
                     </div>
                     <div class="form-groupcard">
                         <label for="category">Catégorie:</label>
-                        <select name="category" id="category">
+                        <select name="category" id="category" required>
                             <option value="animaux domestiques">Animaux domestiques</option>
                             <option value="animaux de sécurités">Animaux de sécurités</option>
                             <option value="animaux dangeureux">Animaux dangeureux</option>
@@ -58,7 +97,7 @@ if ($_POST) {
                     </div>
                     <div class="form-groupcard">
                         <label for="content">Description:</label>
-                        <textarea name="content" id="content" placeholder="Description"></textarea>
+                        <textarea name="content" id="content" placeholder="Description" required></textarea>
                     </div>
                     <div class="promotion-checkbox">
                         <label for="promotion">Promotion</label>
@@ -67,10 +106,13 @@ if ($_POST) {
                 </div>
                 <div class="right-column">
                     <div class="upload-box">
-                        <button type="button" class="upload-btn">Upload</button>
+                        <label for="image" class="upload-btn">Upload</label>
+                        <input type="file" name="image" id="image" accept="image/*" style="display: none;">
+
                     </div>
                 </div>
-                <button class="btn-add" type="submit" value="send"><img src="/img/icons/green-add-button-12023.png" alt=""></button>
+                <button type="submit" class="upload-btn" name="btn-add">
+                    <img src="/img/icons/green-add-button-12023.png" alt="">
             </form>
         </div>
         <div class="Admin-title">
@@ -101,10 +143,20 @@ if ($_POST) {
                                 <th scope="col">Promotion</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <button class="btn btn-primary btn-sm">Voir</button>
+                        <?php foreach ($result as $animaux) : ?>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm"> <a href="detail.php?id=<?= $animaux["id"] ?>"></a>Voir</button>
+                                        <button class="btn btn-warning btn-sm"><a href="edit.php?id=<?= $animaux["id"] ?>"></a>Modifier</button>
+                                        <button class="btn btn-danger btn-sm"> <a href="delete.php?id=<?= $animaux["id"] ?>"></a>Supprimer</button>
+                                    </td>
+                                    <td><?= $animaux['name'] ?></td>
+                                    <td><?= $animaux['content'] ?></td>
+                                    <td><?= $animaux['category'] ?></td>
+                                    <td><?= $animaux['price'] ?></td>
+                                    <td><?= $animaux['discount'] ?></td>
+                                    <!-- <button class="btn btn-primary btn-sm">Voir</button>
                                     <button class="btn btn-warning btn-sm">Modifier</button>
                                     <button class="btn btn-danger btn-sm">Supprimer</button>
                                 </td>
@@ -112,10 +164,10 @@ if ($_POST) {
                                 <td>Produit A</td>
                                 <td>Catégorie 1</td>
                                 <td>100€</td>
-                                <td><input type="checkbox" class="form-check-input"></td>
-                            </tr>
-                            <tr>
-                                <td>
+                                <td><input type="checkbox" class="form-check-input"></td> -->
+                                </tr>
+                                <tr>
+                                    <!-- <td>
                                     <button class="btn btn-primary btn-sm">Voir</button>
                                     <button class="btn btn-warning btn-sm">Modifier</button>
                                     <button class="btn btn-danger btn-sm">Supprimer</button>
@@ -124,9 +176,10 @@ if ($_POST) {
                                 <td>Produit B</td>
                                 <td>Catégorie 2</td>
                                 <td>200€</td>
-                                <td><input type="checkbox" class="form-check-input"></td>
-                            </tr>
-                        </tbody>
+                                <td><input type="checkbox" class="form-check-input"></td> -->
+                                </tr>
+                            </tbody>
+                        <?php endforeach; ?>
                     </table>
                 </div>
             </div>
