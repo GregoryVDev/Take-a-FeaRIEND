@@ -103,13 +103,42 @@ nav.active .container-button-li li:hover {
   background-color: #1e1e1e;
 }
 
-button.Login {
-  font-size: 1.2rem;
+.Login {
+  font-size: 1.0rem;
   border: none;
   padding: 10px 20px;
   border-radius: 10px;
   cursor: pointer;
   background: #e0a800;
+  color: #f5f5f5;
+  font-family: "robotoMed";
+}
+
+.Logout {
+  font-size: 1.0rem;
+  border: 1px solid #e0a800;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #1e1e1e;
+  color: #f5f5f5;
+  font-family: "robotoMed";
+}
+
+.login-link {
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  background: #e0a800;
+  color: #f5f5f5;
+  font-family: "robotoMed";
+}
+
+.logout-link {
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  background: #1e1e1e;
   color: #f5f5f5;
   font-family: "robotoMed";
 }
