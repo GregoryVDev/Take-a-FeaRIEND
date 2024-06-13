@@ -160,6 +160,7 @@ if ($_POST && isset($_POST["name"]) && isset($_POST["content"]) && isset($_POST[
                     <div class="promotion-checkbox">
                         <label for="discount">Promotion</label>
                         <input type="checkbox" name="discount" id="discount" class="form-check-input">
+
                     </div>
                 </div>
                 <div class="right-column">
@@ -172,6 +173,7 @@ if ($_POST && isset($_POST["name"]) && isset($_POST["content"]) && isset($_POST[
                     <img src="/img/icons/green-add-button-12023.png" alt="">
                 </button>
             </form>
+
         </div>
         <div class="Admin-title">
             <h2>ADMINISTRATEUR:</h2>
