@@ -1,6 +1,20 @@
-FROM php:8.3-apache
+# Utilisation de l'image de base PHP Apache
+FROM php:apache
 
-RUN apt-get update && apt-get upgrade -y
-RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable mysqli pdo pdo_mysql
+# Copie des fichiers de l'application dans le conteneur
+COPY . /var/www/html
 
+# Activer le module rewrite Apache
+RUN a2enmod rewrite
+
+# Copie du fichier .htaccess dans le répertoire /var/www/html
+COPY .htaccess /var/www/html/.htaccess
+
+# Installation de dépendances supplémentaires si nécessaire
+# ...
+
+# Exposition du port d'Apache
 EXPOSE 80
+
+# Commande par défaut pour lancer Apache au démarrage du conteneur
+CMD ["apache2-foreground"]
