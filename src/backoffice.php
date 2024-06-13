@@ -1,72 +1,72 @@
 <?php
-
 session_start();
-
 require_once("connect.php");
 
-// Récupérer tous les enregistrements de la table "animaux"
+// Faire le traitement pour faire une suppression multiple
+// On vérifie si le formulaire a été soumis en POST et si le tableau "$_POST['delete_ids']"  est défini et est bien un tableau
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_ids']) && is_array($_POST['delete_ids'])) // On vérifie si $_POST["delete_ids"] est défini (si le champs formulaire "delete_ids) a été envoyé et on vérifie que $_POST["delete_ids"] est un tableau ce qui est important car on attends à recevoir plusieurs valeurs (les IDs des éléments à supprimer)
+{
+    // On transforme le tableau d'id en une chaine de caractère et chaque ID est séparé par une virgule pour une utilisation dans une requête SQL "delete"
+    $ids = implode(',', array_map('intval', $_POST['delete_ids']));
+
+    $sql = "DELETE FROM animaux WHERE id IN ($ids)";
+
+    $query = $db->prepare($sql);
+    $query->execute();
+
+    header("Location: backoffice.php");
+    exit();
+}
+
+
+
 $sql = "SELECT * FROM animaux";
 $query = $db->prepare($sql);
 $query->execute();
 $result = $query->fetchAll(PDO::FETCH_ASSOC);
-?>
 
-<?php
-if ($_POST) {
-    if (
-        isset($_POST["name"]) &&
-        isset($_POST["content"]) &&
-        isset($_POST["category"]) &&
-        isset($_POST["price"])
-    ) {
-        // Sécuriser les données d'entrée
-        $name = strip_tags($_POST["name"]);
-        $content = strip_tags($_POST["content"]);
-        $category = strip_tags($_POST["category"]);
-        $price = strip_tags($_POST["price"]);
-        $discount = isset($_POST["discount"]) ? 1 : 0;
+if ($_POST && isset($_POST["name"]) && isset($_POST["content"]) && isset($_POST["category"]) && isset($_POST["price"])) {
+    $name = strip_tags($_POST["name"]);
+    $content = strip_tags($_POST["content"]);
+    $category = strip_tags($_POST["category"]);
+    $price = strip_tags($_POST["price"]);
+    $discount = isset($_POST["discount"]) ? 1 : 0;
 
-        // Gérer l'image
-        $images = "";
-        if (isset($_FILES["image"]) && $_FILES["image"]["error"] == UPLOAD_ERR_OK) {
-            $imageTmpName = $_FILES["image"]["tmp_name"];
-            $imageName = basename($_FILES["image"]["name"]);
-            $imagePath = "uploads/" . $imageName;
+    $images = "";
+    if (isset($_FILES["image"]) && $_FILES["image"]["error"] == UPLOAD_ERR_OK) {
+        $imageTmpName = $_FILES["image"]["tmp_name"];
+        $imageName = basename($_FILES["image"]["name"]);
+        $imagePath = "uploads/" . $imageName;
 
-            if (move_uploaded_file($imageTmpName, $imagePath)) {
-                $images = $imagePath;
-            }
+        if (move_uploaded_file($imageTmpName, $imagePath)) {
+            $images = $imagePath;
         }
-
-        // Insérer les données dans la table "animaux"
-        $sql = "INSERT INTO animaux (name, content, category, price, discount, images) VALUES (:name, :content, :category, :price, :discount, :images)";
-        $query = $db->prepare($sql);
-
-        $query->bindValue(":name", $name);
-        $query->bindValue(":content", $content);
-        $query->bindValue(":category", $category);
-        $query->bindValue(":price", $price);
-        $query->bindValue(":discount", $discount);
-        $query->bindValue(":images", $images);
-
-        $query->execute();
-
-        require_once("close.php");
-
-        // Rediriger vers la page backoffice après l'insertion
-        header("Location: backoffice.php");
-        exit();
-    } else {
-        var_dump($_POST);
-        die("marche pas");
     }
+
+    $sql = "INSERT INTO animaux (name, content, category, price, discount, images) VALUES (:name, :content, :category, :price, :discount, :images)";
+    $query = $db->prepare($sql);
+
+    $query->bindValue(":name", $name);
+    $query->bindValue(":content", $content);
+    $query->bindValue(":category", $category);
+    $query->bindValue(":price", $price);
+    $query->bindValue(":discount", $discount);
+    $query->bindValue(":images", $images);
+
+    $query->execute();
+
+    require_once("close.php");
+
+    header("Location: backoffice.php");
+    exit();
+} else if ($_POST) {
+    var_dump($_POST);
+    die("Erreur veuillez réessayer");
 }
 ?>
 
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -111,14 +111,14 @@ if ($_POST) {
                         <textarea name="content" id="content" placeholder="Description" required></textarea>
                     </div>
                     <div class="promotion-checkbox">
-                        <label for="promotion">Promotion</label>
-                        <input type="checkbox" name="promotion" id="promotion" class="form-check-input">
+                        <label for="discount">Promotion</label>
+                        <input type="checkbox" name="discount" id="discount" class="form-check-input">
                     </div>
                 </div>
                 <div class="right-column">
                     <div class="upload-box">
                         <label for="image" class="upload-btn">Upload</label>
-                        <input type="file" name="image" id="image" accept="image/*" style="display: none;">
+                        <input type="file" name="images" id="image" accept="image/*" style="display: none;">
                     </div>
                 </div>
                 <button type="submit" class="upload-btn" name="btn-add">
@@ -142,34 +142,39 @@ if ($_POST) {
                 </div>
                 <div class="col-md-9">
                     <h2 class="mb-4 admin-board">Liste produits</h2>
-                    <table class="table table-striped">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">Action</th>
-                                <th scope="col">ID</th>
-                                <th scope="col">Nom</th>
-                                <th scope="col">Catégorie</th>
-                                <th scope="col">Prix</th>
-                                <th scope="col">Promotion</th>
-                            </tr>
-                        </thead>
-                        <?php foreach ($result as $animaux) : ?>
-                            <tbody>
+                    <form method="POST" action="backoffice.php">
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
                                 <tr>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm"><a href="detail.php?id=<?= $animaux["id"] ?>">Voir</a></button>
-                                        <button class="btn btn-warning btn-sm"><a href="edit.php?id=<?= $animaux["id"] ?>">Modifier</a></button>
-                                        <button class="btn btn-danger btn-sm"><a href="delete.php?id=<?= $animaux["id"] ?>">Supprimer</a></button>
-                                    </td>
-                                    <td><?= $animaux['id'] ?></td>
-                                    <td><?= $animaux['name'] ?></td>
-                                    <td><?= $animaux['category'] ?></td>
-                                    <td><?= $animaux['price'] ?></td>
-                                    <td><?= $animaux['discount'] ? 'Oui' : 'Non' ?></td>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Catégorie</th>
+                                    <th scope="col">Prix</th>
+                                    <th scope="col">Promotion</th>
+                                    <th scope="col"><input type="checkbox" id="select-all"></th>
                                 </tr>
-                            </tbody>
-                        <?php endforeach; ?>
-                    </table>
+                            </thead>
+                            <?php foreach ($result as $animaux) : ?>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <button class="btn btn-primary btn-sm"><a href="detail.php?id=<?= $animaux["id"] ?>">Voir</a></button>
+                                            <button class="btn btn-warning btn-sm"><a href="edit.php?id=<?= $animaux["id"] ?>">Modifier</a></button>
+                                            <button class="btn btn-danger btn-sm"><a href="delete.php?id=<?= $animaux["id"] ?>">Supprimer</a></button>
+                                        </td>
+                                        <td><?= $animaux['id'] ?></td>
+                                        <td><?= $animaux['name'] ?></td>
+                                        <td><?= $animaux['category'] ?></td>
+                                        <td><?= $animaux['price'] ?></td>
+                                        <td><?= $animaux['discount'] ? 'Oui' : 'Non' ?></td>
+                                        <td><input type="checkbox" name="delete_ids[]" value="<?= $animaux['id'] ?>"></td>
+                                    </tr>
+                                </tbody>
+                            <?php endforeach; ?>
+                        </table>
+                        <button type="submit" class="btn btn-danger">Supprimer les articles sélectionnés</button>
+                    </form>
                 </div>
             </div>
         </div>
