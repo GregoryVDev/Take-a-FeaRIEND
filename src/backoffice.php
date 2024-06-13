@@ -18,10 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_ids']) && is_ar
     exit();
 }
 
-?>
-
-<?php
-
 // On vérifie si un fichier a été envoyé
 if (isset($_FILES["images"]) && $_FILES["images"]["error"] === 0) {
     // On a reçu l'image
@@ -57,11 +53,19 @@ if (isset($_FILES["images"]) && $_FILES["images"]["error"] === 0) {
     // On génère un nom unique
     $newname = md5(uniqid());
     // On génère le chemin complet
-    echo __DIR__;
-}
-?>
+    $newfilename = __DIR__ . "/img/$newname.$extension";
 
-<?php
+    // On déplace le fichier de tmp à img en le renommant
+    if (!move_uploaded_file($_FILES["images"]["tmp_name"], $newfilename)) {
+        die("L'upload a échoué");
+    }
+
+    // On interdit l'execution du fichier
+    chmod($newfilename, 0644);
+
+    // Pour supprimer l'image en refreshant la page
+    // unlink(__DIR__."NomDuFichier");
+}
 
 $sql = "SELECT * FROM animaux";
 $query = $db->prepare($sql);
@@ -156,6 +160,7 @@ if ($_POST && isset($_POST["name"]) && isset($_POST["content"]) && isset($_POST[
                     <div class="promotion-checkbox">
                         <label for="discount">Promotion</label>
                         <input type="checkbox" name="discount" id="discount" class="form-check-input">
+
                     </div>
                 </div>
                 <div class="right-column">
@@ -168,6 +173,7 @@ if ($_POST && isset($_POST["name"]) && isset($_POST["content"]) && isset($_POST[
                     <img src="/img/icons/green-add-button-12023.png" alt="">
                 </button>
             </form>
+
         </div>
         <div class="Admin-title">
             <h2>ADMINISTRATEUR:</h2>
@@ -195,7 +201,7 @@ if ($_POST && isset($_POST["name"]) && isset($_POST["content"]) && isset($_POST[
                                     <th scope="col">Catégorie</th>
                                     <th scope="col">Prix</th>
                                     <th scope="col">Promotion</th>
-                                    <th scope="col"><input type="checkbox" id="select-all"></th>
+                                    <th scope="col">
                                 </tr>
                             </thead>
                             <?php foreach ($result as $animaux) : ?>
