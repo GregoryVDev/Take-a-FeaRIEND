@@ -1,18 +1,38 @@
 <?php
-    //On vérifie si le formulaire a était envoyé 
-    if(!empty($_POST)){
-        if(isset($_POST["email"], $_POST["pass"])
-        && !empty($_POST["email"]) && !empty($_POST["pass"])){
+session_start();
+require_once('user.php');
 
-        }if(!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){ 
-              //filter_var et FILTER_VALIDATE_EMAIL servent a sécuriser l'adresse mail en back-end
-                die("L'adresse eMail est incorrecte");
-            }
+$errors = [];
+$messages = [];
+
+// On teste si le formulaire a bien été rempli
+if (isset($_POST['loginUser'])) {
+    if (isset($_POST["email"], $_POST["pass"]) && !empty($_POST["email"]) && !empty($_POST["pass"])) {
+        if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+            // filter_var et FILTER_VALIDATE_EMAIL servent à sécuriser l'adresse mail en back-end
+            die("L'adresse eMail est incorrecte");
         }
-            //On se connecte a la BDD
-            require_once("connect.php");
-?>
 
+        require_once('connect.php');
+
+        $user = verifyUserLoginPassword($db, $_POST['email'], $_POST['pass']);
+
+        if ($user) {
+            // On utilise une seule session pour stocker l'utilisateur
+            $_SESSION['user'] = [
+                'email' => $user['email'],
+                'id' => $user['id']
+            ];
+            header('Location: index.php');
+            exit(); // On arrete le script aprés la redirection
+        } else {
+            $errors[] = 'Email ou mot de passe incorrect, votre vie est un échec...';
+        }
+    } else {
+        $errors[] = 'Veuillez remplir tous les champs du formulaire.';
+    }
+}
+?>
 
 <!doctype html>
 <html lang="en">
@@ -26,28 +46,35 @@
 </head>
 <body>
     <section class="full-box">
-    <h1 class="font-take">Take a FeaRIEND</h1>
-    <form method="POST" class="p-4 p-md-5 border rounded-3 bg-body-tertiary center-form">
-        <div class="form-floating mb-3">
+        <h1 class="font-take">Take a FeaRIEND</h1>
+
+        <!-- Afficher les erreurs s'il y en a -->
+        <?php if (!empty($errors)): ?>
+            <div class="alert alert-danger" role="alert">
+                <?php foreach ($errors as $error): ?>
+                    <p><?= htmlspecialchars($error) ?></p>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <form method="POST" class="p-4 p-md-5 border rounded-3 bg-body-tertiary center-form">
+            <div class="form-floating mb-3">
                 <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
                 <label for="email">Email address</label>
-        </div>
-        <div class="form-floating mb-3">
+            </div>
+            <div class="form-floating mb-3">
                 <input type="password" class="form-control" name="pass" id="pass" placeholder="Password">
                 <label for="pass">Password</label>
-        </div>
-        <div class="checkbox mb-3">
+            </div>
+            <div class="checkbox mb-3">
                 <label>
-                <input type="checkbox" value="remember-me"> Remember me
+                    <input type="checkbox" value="remember-me"> Remember me
                 </label>
-        </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Connexion</button>
-        <hr class="my-4">
-        <small class="text-body-secondary">Si vous ne possédez pas de compte cliquer sur <a href="inscription.php">S'enregistrer</a>.</small>
-    </form>
-
-
-    </div>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" name="loginUser" type="submit">Connexion</button>
+            <hr class="my-4">
+            <small class="text-body-secondary">Si vous ne possédez pas de compte cliquer sur <a href="inscription.php">S'enregistrer</a>.</small>
+        </form>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
