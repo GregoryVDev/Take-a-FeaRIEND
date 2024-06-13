@@ -62,6 +62,9 @@ if (isset($_FILES["images"]) && $_FILES["images"]["error"] === 0) {
 
     // On interdit l'execution du fichier
     chmod($newfilename, 0644);
+
+    // Pour supprimer l'image en refreshant la page
+    // unlink(__DIR__."NomDuFichier");
 }
 
 $sql = "SELECT * FROM animaux";
