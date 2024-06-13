@@ -70,11 +70,11 @@
         <div class="container-produce">
             <div class="card-produce">
                 <img class="img-produce" src="/img/dangereux/105813.png" alt="Animated Card-produce Hover Effect Html & CSS">
-                <div class="intro-produce">
+                <div class="intro-produce"><a href="detail.php">
                     <h1 class="text-h1">MousTigre</h1>
                     <p class="text-p">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rerum laudantium, ad deserunt quibusdam corrupti aut, recusandae alias dolores ex expedita quaerat a in et.
-                    </p>
+                    </p></a>
                 </div>
             </div>
 
