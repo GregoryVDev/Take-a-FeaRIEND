@@ -139,5 +139,5 @@
 </body>
 
 <?php
-    require_once("footer.php");
+    require_once("./template/footer.php");
 ?>
