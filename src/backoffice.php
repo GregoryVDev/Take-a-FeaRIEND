@@ -18,7 +18,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_ids']) && is_ar
     exit();
 }
 
+?>
 
+<?php
+
+// On vérifie si un fichier a été envoyé
+if (isset($_FILES["images"]) && $_FILES["images"]["error"] === 0) {
+    // On a reçu l'image
+    // On procède aux vérifications
+    // On vérifie toujours l'extension ET le type Mime
+
+    $allowed = [
+        "jpg" => "image/jpeg",
+        "jpeg" => "image/jpeg",
+        "png" => "image/png"
+    ];
+
+    // On va récupérer le nom du fichier
+    $filename = $_FILES["images"]["name"];
+    $filetype = $_FILES["images"]["type"];
+    $filesize = $_FILES["images"]["size"];
+
+    // On vérifie si le fichier est bien nommé avec une extension et qui est dans le bon type
+    $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+    // On vérifie l'absence de l'extension dans les clés de $allowed ou l'absence de type Mime dans les valeurs
+    if (!array_key_exists($extension, $allowed) || !in_array($filetype, $allowed)) {
+        // Soit l'extension soit le type est incorrect (ou les deux)
+        die("Erreur : le format du fichier est incorrect");
+    }
+
+    // Le type est correct
+    // On limite à 1Mo
+    if ($filesize > 1024 * 1024) {
+        die("Fichier trop volumineux");
+    }
+}
+?>
+
+<?php
 
 $sql = "SELECT * FROM animaux";
 $query = $db->prepare($sql);
