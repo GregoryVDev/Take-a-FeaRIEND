@@ -113,3 +113,66 @@ button.Login {
   color: #f5f5f5;
   font-family: "robotoMed";
 }
+
+/* SECTION IMAGE-ILLUSTRATION */
+
+.image-illustration {
+  background: url("../../img/domestiques/chaton.png") fixed;
+  background-size: cover;
+  background-position: 75% 75%;
+  height: 100vh;
+}
+
+/* CONTAINER CARDS */
+
+.cards-section {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  align-items: center;
+}
+
+figure img {
+  width: 350px;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 4px;
+  transition: transform 0.4s ease-in-out;
+}
+
+figure {
+  position: relative;
+  height: 500px;
+  box-shadow: 5px 5px 20px;
+  overflow: hidden;
+  cursor: pointer;
+  width: 350px;
+}
+
+.intro-card {
+  position: absolute;
+  height: 80px;
+  width: 350px;
+  bottom: 0;
+  overflow: hidden;
+  padding: 10px;
+  color: #f5f5f5;
+  background-color: rgba(27, 27, 27, 0.5);
+  transition: 0.4s ease-in-out;
+}
+
+figure:hover .intro-card {
+  height: 280px;
+  bottom: 0;
+  background-color: #1e1e1e;
+}
+
+figure:hover p {
+  opacity: 1;
+  visibility: visible;
+}
+
+figure:hover img {
+  transform: scale(1.1) rotate(-3deg);
+}

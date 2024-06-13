@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/produits/produits.css">
-    <link rel="stylesheet" href="./css/produits/produitsresponsive.css">
+    <link rel="stylesheet" href="./css/produits/produits-responsive.css">
     <title>Nos produits</title>
 </head>
 
@@ -34,6 +34,25 @@
                 </div>
             </nav>
         </header>
+        <section class="image-illustration"></section>
+        <section class="cards-section">
+            <h1>Animaux doméstiques</h1>
+            <div class="container-domestique">
+                <article class="container-cards">
+                    <figure>
+                        <img src="./img/domestiques/0f5fabd8.png" alt="Chat">
+                        <figcaption>
+                            <div class="intro-card">
+                                <h2>Chaton</h2>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rerum laudantium, ad deserunt quibusdam corrupti aut, recusandae alias dolores ex expedita quaerat a in et.
+                                </p>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </article>
+            </div>
+        </section>
 
     </main>
 
