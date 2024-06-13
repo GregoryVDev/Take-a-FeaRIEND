@@ -142,14 +142,13 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: robotoMed;
+    font-family: robotoBold;
 }
 .produces-title {
     display: flex;
     justify-content: center;
     align-items: center;
     border-bottom: 10px solid black;
-    width: 180px;
 }
 .produces-cards {
     border-top: 2px solid rgb(224, 224, 224);
@@ -238,11 +237,14 @@ body {
     text-align: center;
     width: 50%;
 }
-.discount-title {
-    font-family: robotoBold;
-    font-size: 80px;
-    margin-top: 100px;
+.discount-left {
+    margin-top: 120px;
 }
+.discount-title {
+  font-family: robotoBold;
+  font-size: 80px;
+}
+
 .discount-price {
     font-family: robotoMed;
     color: white;
@@ -459,7 +461,10 @@ textarea::placeholder {
 /*END SUBSCRIBE LOGIN*/
 
 /*START FOOTER*/
-
+.full-footer{
+  background-color: #212529;
+  margin-top: 130px;
+}
 .footer-style {
   background-color: #212529;
   color: #fff;
