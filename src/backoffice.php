@@ -53,6 +53,11 @@ if (isset($_FILES["images"]) && $_FILES["images"]["error"] === 0) {
     if ($filesize > 1024 * 1024) {
         die("Fichier trop volumineux");
     }
+
+    // On génère un nom unique
+    $newname = md5(uniqid());
+    // On génère le chemin complet
+    echo __DIR__;
 }
 ?>
 
