@@ -175,7 +175,7 @@ nav.active .container-button-li li:hover {
   gap: 50px;
 }
 
-figure img {
+.container-cards figure img {
   width: 350px;
   height: 500px;
   object-fit: cover;
@@ -183,7 +183,7 @@ figure img {
   transition: transform 0.4s ease-in-out;
 }
 
-figure {
+.container-cards figure {
   position: relative;
   height: 500px;
   box-shadow: 5px 5px 20px;
@@ -192,11 +192,11 @@ figure {
   width: 350px;
 }
 
-figure h3 {
+.container-cards figure h3 {
   font-size: 1.4rem;
 }
 
-figure a {
+.container-cards figure a {
   color: #f5f5f5;
   text-decoration: none;
 }
@@ -213,25 +213,25 @@ figure a {
   transition: 0.4s ease-in-out;
 }
 
-figure:hover .intro-card {
+.container-cards figure:hover .intro-card {
   height: 280px;
   bottom: 0;
   background-color: #1e1e1e;
 }
 
-figcaption p {
+.container-cards figcaption p {
   font-size: 16px;
   padding: 10px;
   visibility: hidden;
   opacity: 0;
 }
 
-figure:hover p {
+.container-cards figure:hover p {
   opacity: 1;
   visibility: visible;
 }
 
-figure:hover img {
+.container-cards figure:hover img {
   transform: scale(1.1) rotate(-3deg);
 }
 
