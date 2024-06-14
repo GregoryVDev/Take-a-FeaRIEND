@@ -295,21 +295,25 @@ body {
 .detail-id{
   color: #ccc;
   font-family: robotoMed;
+  text-align: start;
 }
 .detail-category{
   color: #ccc;
   font-family: robotoBold;
   font-size: 20px;
+  text-align: start;
 }
 .detail-description{
   color: #ccc;
   font-family: robotoMed;
   font-size: 18px;
+  text-align: start;
 }
 .detail-price{
   color: #ccc;
   font-family: robotoMed;
   font-size: 30px;
+  text-align: start;
 }
 .btn-buy{
   font-family: robotoBold;
