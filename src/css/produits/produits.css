@@ -223,6 +223,7 @@ nav.active .container-button-li li:hover {
   font-size: 16px;
   padding: 10px;
   visibility: hidden;
+  text-align: left;
   opacity: 0;
 }
 
@@ -277,35 +278,35 @@ footer {
   justify-content: space-around;
 }
 
-.container-footer h3 {
+footer .container-footer h3 {
   color: #e0a800;
   font-size: 1.3rem;
   text-decoration: underline;
 }
 
-.container-footer ul {
+footer .container-footer ul {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.container-footer ul li {
+footer .container-footer ul li {
   color: #f5f5f5;
   list-style: none;
 }
 
-.container-footer ul li a {
+footer .container-footer ul li a {
   color: #f5f5f5;
   text-decoration: none;
   font-size: 1.1rem;
 }
 
-.container-titre h2 {
+footer .container-titre h2 {
   font-family: "roadRage";
   font-size: 2.5rem;
 }
 
-.container-titre h2,
+footer .container-titre h2,
 p {
   color: #f5f5f5;
   text-align: center;
@@ -318,18 +319,18 @@ p {
   gap: 10px;
 }
 
-.container-logos a {
+footer .container-logos a {
   color: #f5f5f5;
 }
 
-.container-reserve p {
+footer .container-reserve p {
   border-top: 1px solid #f5f5f5;
   width: 60%;
   padding: 30px;
   margin: auto;
 }
 
-.container-reserve p a {
+footer .container-reserve p a {
   text-decoration: none;
 }
 
