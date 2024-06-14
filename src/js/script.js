@@ -17,6 +17,7 @@ function toggleScrollTopButton() {
 }
 
 // SLIDESLOW
+
 const carouselInner = document.querySelector(".carousel-inner");
 const carouselItems = document.querySelectorAll(".carousel-item");
 let currentIndex = 0;
