@@ -219,6 +219,13 @@ figure:hover .intro-card {
   background-color: #1e1e1e;
 }
 
+figcaption p {
+  font-size: 16px;
+  padding: 10px;
+  visibility: hidden;
+  opacity: 0;
+}
+
 figure:hover p {
   opacity: 1;
   visibility: visible;
@@ -329,7 +336,6 @@ p {
 /* FOOTER LEFT */
 
 .left-footer {
-  /* border: 3px solid pink; */
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -351,7 +357,6 @@ p {
 /* FOOTER RIGHT */
 
 .right-footer {
-  /* border: 3px solid purple; */
   display: flex;
   flex-direction: column;
   gap: 20px;
