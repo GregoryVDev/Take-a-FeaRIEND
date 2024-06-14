@@ -3,6 +3,8 @@
     require_once("connect.php");
     require_once("./template/header.php");
 
+    define('_ASSET_IMG_PATH_','img/');
+
     if(!isset($_GET['id'])){
         die('Id pas trouvé');
     }
@@ -16,10 +18,14 @@
 
     $animal = $requete->fetch(PDO::FETCH_ASSOC);
 
-    if(!$animal){
-        die("animal pas trouvé");
+    if (!$animal) {
+        die("Animal pas trouvé");
     }
 
+    $imagePath = _ASSET_IMG_PATH_ . 'nointernet.jpg'; // Valeur par défaut
+    if (!empty($animal['images'])) {
+        $imagePath = _ASSET_IMG_PATH_ . $animal['images'];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +50,7 @@
 
                 <div class="bg-dark row flex-lg-row-reverse align-items-center g-5 pb-5 detail-card">
                     <div class="col-10 col-sm-8 col-lg-6">
-                        <img src="/img/dangereux/105813.png" class="d-block mx-lg-auto" alt="Bootstrap Themes" width="auto" height="600px" loading="lazy">
+                    <img src="<?= $imagePath; ?>" class="d-block mx-lg-auto" alt="Bootstrap Themes" width="auto" height="600px" loading="lazy">
                     </div>
                     <div class="col-lg-6">
                             <h1 class="detail-name"><?= $animal['name'] ?></h1>
@@ -64,3 +70,10 @@
 
     <?php
     require_once("./template/footer.php");
+
+
+    ?>
+
+
+<!-- EN DURE <img src="/img/dangereux/105813.png" class="d-block mx-lg-auto" alt="Bootstrap Themes" width="auto" height="600px" loading="lazy"> -->
+    <!-- EN PHP CODE <img src="/img/dangereux/<POINTDINTERROGATION=$animal['image']?>" class="d-block mx-lg-auto" alt="Bootstrap Themes" width="auto" height="600px" loading="lazy"> -->

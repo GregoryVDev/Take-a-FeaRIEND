@@ -1,24 +1,31 @@
-<?php
-session_start();
-require_once("connect.php");
+<?php 
+    session_start();
+    require_once("connect.php");
+    require_once("./template/header.php");
 
-// Vérifier si l'ID de l'animal est fourni dans l'URL
-if (!isset($_GET['id'])) {
-    die('ID not provided');
-}
+    define('_ASSET_IMG_PATH_', 'img/');
 
-$id = $_GET['id'];
+    if (!isset($_GET['id'])) {
+        die('Id pas trouvé');
+    }
 
-$sql = "SELECT * FROM animaux WHERE id = :id";
-$requete = $db->prepare($sql);
-$requete->bindValue(":id", $id, PDO::PARAM_INT);
-$requete->execute();
+    $id = $_GET['id'];
 
-$animal = $requete->fetch(PDO::FETCH_ASSOC);
+    $sql = "SELECT * FROM animaux WHERE id = :id";
+    $requete = $db->prepare($sql);
+    $requete->bindValue(':id', $id, PDO::PARAM_INT);
+    $requete->execute();
 
-if (!$animal) {
-    die('Animal not found');
-}
+    $animal = $requete->fetch(PDO::FETCH_ASSOC);
+
+    if (!$animal) {
+        die("Animal pas trouvé");
+    }
+
+    $imagePath = _ASSET_IMG_PATH_ . 'nointernet.jpg'; // Valeur par défaut
+    if (!empty($animal['images'])) {
+        $imagePath = _ASSET_IMG_PATH_ . $animal['images'];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -26,31 +33,38 @@ if (!$animal) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="./css/detail.css">
+    <link rel="stylesheet" href="./css/produits/produits.css">
+    <link rel="stylesheet" href="./css/produits/produits-responsive.css">
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/style.css">
     <title>Détails de <?= htmlspecialchars($animal["name"], ENT_QUOTES, 'UTF-8') ?></title>
 </head>
-<body>
-    <?php require_once("./template/header.php"); ?>
 
-    <section class="detail-section">
-        <div class="container">
-            <h2>Détails de <?= htmlspecialchars($animal["name"], ENT_QUOTES, 'UTF-8') ?></h2>
-            <div class="detail-card">
-                <img src="/img/dangereux/105813.png" alt="Image de l'animal">
-                <div class="details">
-                    <p><?= htmlspecialchars($animal["content"], ENT_QUOTES, 'UTF-8') ?></p>
-                    <!-- Autres détails de l'animal ici -->
+<body class="detail-body">
+    <main class="container">
+        <div class="row">
+            <section class="col-12">
+
+                <div class="bg-dark row flex-lg-row-reverse align-items-center g-5 pb-5 detail-card">
+                    <div class="col-10 col-sm-8 col-lg-6">
+                        <img src="<?= htmlspecialchars($imagePath, ENT_QUOTES, 'UTF-8') ?>" class="d-block mx-lg-auto" alt="Image de l'animal" width="auto" height="600px" loading="lazy">
+                    </div>
+                    <div class="col-lg-6">
+                        <h1 class="detail-name"><?= htmlspecialchars($animal['name'], ENT_QUOTES, 'UTF-8') ?></h1>
+                        <p class="detail-id">ID: <?= htmlspecialchars($animal['id'], ENT_QUOTES, 'UTF-8') ?></p>
+                        <p class="detail-category">Catégorie: <?= htmlspecialchars($animal['category'], ENT_QUOTES, 'UTF-8') ?></p>
+                        <p class="detail-description">Description: <?= htmlspecialchars($animal['content'], ENT_QUOTES, 'UTF-8') ?></p>
+                        <p class="detail-price">Prix: <?= htmlspecialchars($animal['price'], ENT_QUOTES, 'UTF-8') ?>€</p>
+                        <button type="button" class="btn btn-outline-warning btn-buy">+ Panier</button>
+                    </div>
                 </div>
-            </div>
+            </section>
         </div>
-    </section>
+    </main>
 
-    <script src="/js/script.js"></script>
+    <?php require_once("./template/footer.php"); ?>
 </body>
 </html>
-
-<?php require_once("./template/footer.php"); ?>
