@@ -15,3 +15,15 @@ function toggleScrollTopButton() {
     scrollButton.style.display = "none";
   }
 }
+
+// SLIDESLOW
+const carouselInner = document.querySelector(".carousel-inner");
+const carouselItems = document.querySelectorAll(".carousel-item");
+let currentIndex = 0;
+
+function showNextSlide() {
+  currentIndex = (currentIndex + 1) % carouselItems.length;
+  carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+setInterval(showNextSlide, 3000); // Change slide every 3 seconds
