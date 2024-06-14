@@ -29,9 +29,6 @@ $animals = $requete->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-    <?php
-    print_r($_SESSION);
-    ?>
     <section class="intro">
         <header>
             <div class="logo">
