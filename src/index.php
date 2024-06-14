@@ -1,6 +1,6 @@
-<?php 
-    session_start();
-    require_once("connect.php")
+<?php
+session_start();
+require_once("connect.php")
 ?>
 
 
@@ -10,7 +10,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="./css/produits/produits.css">
     <link rel="stylesheet" href="./css/produits/produits-responsive.css">
@@ -21,40 +20,40 @@
 
 <body>
     <?php
-        print_r($_SESSION);
+    print_r($_SESSION);
     ?>
     <section class="intro">
-<header>
-    <div class="logo">
-        <img src="./img/logosite.png" alt="Logo Take a FeaRIEND">
-    </div>
-    <nav id="nav">
-        <ul>
-            <div class="container-li">
-                <li><a href="#">Accueil</a></li>
-                <li><a href="#">Catégories</a></li>
-                <li><a href="#">A propos</a></li>
+        <header>
+            <div class="logo">
+                <img src="./img/logosite.png" alt="Logo Take a FeaRIEND">
             </div>
-            <div class="container-button-li">
+            <nav id="nav">
+                <ul>
+                    <div class="container-li">
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#">Catégories</a></li>
+                        <li><a href="#">A propos</a></li>
+                    </div>
+                    <div class="container-button-li">
 
-            <?php if(empty($_SESSION['user'])) { ?>
-                <div class="container-button-li">
-                    <button type="button" class="Login"><a class="login-link" href="ConnexionUser.php">Login</a></button>
+                        <?php if (empty($_SESSION['user'])) { ?>
+                            <div class="container-button-li">
+                                <button type="button" class="Login"><a class="login-link" href="ConnexionUser.php">Login</a></button>
+                            </div>
+                        <?php } else { ?>
+                            <div class="container-button-li">
+                                <button type="button" class="Logout"><a class="logout-link" href="DeconnexionUser.php">Logout</a></button>
+                            </div>
+                        <?php } ?>
+
+
+                    </div>
+                </ul>
+                <div id="burger">
+                    <img src="./img/burger-bar.png" alt="Menu Burger">
                 </div>
-            <?php } else { ?>
-                <div class="container-button-li">
-                    <button type="button" class="Logout"><a class="logout-link" href="DeconnexionUser.php">Logout</a></button>
-                </div>
-            <?php } ?>
-
-
-            </div> 
-        </ul>
-        <div id="burger">
-            <img src="./img/burger-bar.png" alt="Menu Burger">
-        </div>
-    </nav>
-</header>
+            </nav>
+        </header>
 
 
 
@@ -88,50 +87,51 @@
         </div>
 
         <article class="produces-cards">
-        <div class="container-produce">
-            <div class="card-produce">
-                <img class="img-produce" src="/img/dangereux/105813.png" alt="Animated Card-produce Hover Effect Html & CSS">
-                <div class="intro-produce"><a href="detail.php">
-                    <h1 class="text-h1">MousTigre</h1>
-                    <p class="text-p">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rerum laudantium, ad deserunt quibusdam corrupti aut, recusandae alias dolores ex expedita quaerat a in et.
-                    </p></a>
+            <div class="container-produce">
+                <div class="card-produce">
+                    <img class="img-produce" src="/img/dangereux/105813.png" alt="Animated Card-produce Hover Effect Html & CSS">
+                    <div class="intro-produce"><a href="detail.php">
+                            <h1 class="text-h1">MousTigre</h1>
+                            <p class="text-p">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rerum laudantium, ad deserunt quibusdam corrupti aut, recusandae alias dolores ex expedita quaerat a in et.
+                            </p>
+                        </a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card-produce">
-                <img class="img-produce" src="/img/dangereux/105605.png" alt="Animated Card-produce Hover Effect Html & CSS">
-                <div class="intro-produce">
-                    <h1 class="text-h1">ScorBuffle</h1>
-                    <p class="text-p">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rerum laudantium, ad deserunt quibusdam corrupti aut, recusandae alias dolores ex expedita quaerat a in et.
-                    </p>
+                <div class="card-produce">
+                    <img class="img-produce" src="/img/dangereux/105605.png" alt="Animated Card-produce Hover Effect Html & CSS">
+                    <div class="intro-produce">
+                        <h1 class="text-h1">ScorBuffle</h1>
+                        <p class="text-p">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rerum laudantium, ad deserunt quibusdam corrupti aut, recusandae alias dolores ex expedita quaerat a in et.
+                        </p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card-produce">
-                <img class="img-produce" src="/img/dangereux/105155.png" alt="Animated Card-produce Hover Effect Html & CSS">
-                <div class="intro-produce">
-                    <h1 class="text-h1">Valion</h1>
-                    <p class="text-p">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rerum laudantium, ad deserunt quibusdam corrupti aut, recusandae alias dolores ex expedita quaerat a in et.
-                    </p>
+                <div class="card-produce">
+                    <img class="img-produce" src="/img/dangereux/105155.png" alt="Animated Card-produce Hover Effect Html & CSS">
+                    <div class="intro-produce">
+                        <h1 class="text-h1">Valion</h1>
+                        <p class="text-p">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rerum laudantium, ad deserunt quibusdam corrupti aut, recusandae alias dolores ex expedita quaerat a in et.
+                        </p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card-produce">
-                <img class="img-produce" src="/img/dangereux/105446.png" alt="Animated Card-produce Hover Effect Html & CSS">
-                <div class="intro-produce">
-                    <h1 class="text-h1">Requare</h1>
-                    <p class="text-p">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rerum laudantium, ad deserunt quibusdam corrupti aut, recusandae alias dolores ex expedita quaerat a in et.
-                    </p>
+                <div class="card-produce">
+                    <img class="img-produce" src="/img/dangereux/105446.png" alt="Animated Card-produce Hover Effect Html & CSS">
+                    <div class="intro-produce">
+                        <h1 class="text-h1">Requare</h1>
+                        <p class="text-p">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rerum laudantium, ad deserunt quibusdam corrupti aut, recusandae alias dolores ex expedita quaerat a in et.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
         </article>
     </section>
-    
+
     <section class="discount">
         <div class="discount-pub">
             <div class="discount-left">
@@ -145,7 +145,7 @@
             </div>
         </div>
         <div class="discount-produce">
-        <div class="card-produce">
+            <div class="card-produce">
                 <img class="img-produce" src="/img/domestiques/105843.png" alt="Animated Card-produce Hover Effect Html & CSS">
                 <div class="intro-produce">
                     <h1 class="text-h1">Smileur</h1>
@@ -160,5 +160,5 @@
 </body>
 
 <?php
-    require_once("./template/footer.php");
+require_once("./template/footer.php");
 ?>

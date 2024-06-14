@@ -75,6 +75,19 @@
     transform: scaleX(1);
     transform-origin: bottom left;
   }
+
+  /* FOOTER LEFT*/
+
+  .left-footer {
+    /* border: 3px solid pink; */
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    gap: 25px;
+    width: 50%;
+  }
+
+  /* FOOTER RIGHT */
 }
 
 /* DESKTOP */
@@ -163,5 +176,17 @@
   ol,
   ul {
     margin-bottom: 0;
+  }
+
+  /* FOOTER LEFT */
+
+  .container-footer {
+    justify-content: center;
+  }
+
+  .left-footer {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
   }
 }
