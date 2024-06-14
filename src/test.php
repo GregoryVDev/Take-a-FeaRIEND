@@ -1,72 +1,56 @@
+<?php
+session_start();
+require_once("connect.php");
+
+// Vérifier si l'ID de l'animal est fourni dans l'URL
+if (!isset($_GET['id'])) {
+    die('ID not provided');
+}
+
+$id = $_GET['id'];
+
+$sql = "SELECT * FROM animaux WHERE id = :id";
+$requete = $db->prepare($sql);
+$requete->bindValue(":id", $id, PDO::PARAM_INT);
+$requete->execute();
+
+$animal = $requete->fetch(PDO::FETCH_ASSOC);
+
+if (!$animal) {
+    die('Animal not found');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tableau Administrateur</title>
-    <!-- Inclure le CSS de Bootstrap -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .banner {
-            width: 100%;
-            max-width: 800px;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="./css/detail.css">
+    <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Détails de <?= htmlspecialchars($animal["name"], ENT_QUOTES, 'UTF-8') ?></title>
 </head>
 <body>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-4">
-                <img src="/img/godzilla-Paneladmin2.jpg" alt="Bannière" class="img-fluid banner">
-            </div>
-            <div class="col-md-8">
-                <h2 class="mb-4">Tableau Administrateur</h2>
-                <table class="table table-striped">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Action</th>
-                            <th scope="col">ID</th>
-                            <th scope="col">Nom</th>
-                            <th scope="col">Catégorie</th>
-                            <th scope="col">Prix</th>
-                            <th scope="col">Promotion</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <button class="btn btn-primary btn-sm">Voir</button>
-                                <button class="btn btn-warning btn-sm">Modifier</button>
-                                <button class="btn btn-danger btn-sm">Supprimer</button>
-                            </td>
-                            <td>1</td>
-                            <td>Produit A</td>
-                            <td>Catégorie 1</td>
-                            <td>100€</td>
-                            <td><input type="checkbox" class="form-check-input"></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <button class="btn btn-primary btn-sm">Voir</button>
-                                <button class="btn btn-warning btn-sm">Modifier</button>
-                                <button class="btn btn-danger btn-sm">Supprimer</button>
-                            </td>
-                            <td>2</td>
-                            <td>Produit B</td>
-                            <td>Catégorie 2</td>
-                            <td>200€</td>
-                            <td><input type="checkbox" class="form-check-input"></td>
-                        </tr>
-                        <!-- Ajouter d'autres lignes ici -->
-                    </tbody>
-                </table>
+    <?php require_once("./template/header.php"); ?>
+
+    <section class="detail-section">
+        <div class="container">
+            <h2>Détails de <?= htmlspecialchars($animal["name"], ENT_QUOTES, 'UTF-8') ?></h2>
+            <div class="detail-card">
+                <img src="/img/dangereux/105813.png" alt="Image de l'animal">
+                <div class="details">
+                    <p><?= htmlspecialchars($animal["content"], ENT_QUOTES, 'UTF-8') ?></p>
+                    <!-- Autres détails de l'animal ici -->
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Inclure le JS de Bootstrap et les dépendances -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>
+
+<?php require_once("./template/footer.php"); ?>

@@ -1,6 +1,16 @@
 <?php
 session_start();
-require_once("connect.php")
+require_once("connect.php");
+
+$sql = "SELECT * FROM animaux";
+
+$requete = $db->prepare($sql);
+
+$requete->execute();
+
+$animals = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+// var_dump($animals);
 ?>
 
 
@@ -56,6 +66,7 @@ require_once("connect.php")
         </header>
 
 
+        <?php require_once("./template/header.php"); ?>
 
         <article class="text-intro">
             <div>
@@ -85,49 +96,33 @@ require_once("connect.php")
                 <h2>Nos Produits</h2>
             </div>
         </div>
-
         <article class="produces-cards">
             <div class="container-produce">
-                <div class="card-produce">
-                    <img class="img-produce" src="/img/dangereux/105813.png" alt="Animated Card-produce Hover Effect Html & CSS">
-                    <div class="intro-produce"><a href="detail.php">
-                            <h1 class="text-h1">MousTigre</h1>
-                            <p class="text-p">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rerum laudantium, ad deserunt quibusdam corrupti aut, recusandae alias dolores ex expedita quaerat a in et.
-                            </p>
-                        </a>
-                    </div>
-                </div>
 
-                <div class="card-produce">
-                    <img class="img-produce" src="/img/dangereux/105605.png" alt="Animated Card-produce Hover Effect Html & CSS">
-                    <div class="intro-produce">
-                        <h1 class="text-h1">ScorBuffle</h1>
-                        <p class="text-p">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rerum laudantium, ad deserunt quibusdam corrupti aut, recusandae alias dolores ex expedita quaerat a in et.
-                        </p>
-                    </div>
-                </div>
+                <?php
+                // Mélanger les animaux de manière aléatoire
+                shuffle($animals);
+                //déclaration de la variable counter pour limiter les cartes affiché sur l'index
+                $counter = 0;
+                //boucle foreach pour afficher et limiter a 4 cartes les animaux de la BDD
+                foreach ($animals as $animal) {
+                    if ($counter < 4) { ?>
 
-                <div class="card-produce">
-                    <img class="img-produce" src="/img/dangereux/105155.png" alt="Animated Card-produce Hover Effect Html & CSS">
-                    <div class="intro-produce">
-                        <h1 class="text-h1">Valion</h1>
-                        <p class="text-p">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rerum laudantium, ad deserunt quibusdam corrupti aut, recusandae alias dolores ex expedita quaerat a in et.
-                        </p>
-                    </div>
-                </div>
+                        <div class="card-produce">
+                            <img class="img-produce" src="/img/dangereux/105813.png" alt="Animated Card-produce Hover Effect Html & CSS">
+                            <div class="intro-produce"><a href="detail.php?id= <?= $animal['id'] ?>" class="txt-deco">
+                                    <h4 class="text-h4"><?= $animal["name"] ?></h4>
+                                    <p class="text-p"><?= $animal["content"] ?></p>
+                                </a>
+                            </div>
+                        </div>
+                <?php
 
-                <div class="card-produce">
-                    <img class="img-produce" src="/img/dangereux/105446.png" alt="Animated Card-produce Hover Effect Html & CSS">
-                    <div class="intro-produce">
-                        <h1 class="text-h1">Requare</h1>
-                        <p class="text-p">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rerum laudantium, ad deserunt quibusdam corrupti aut, recusandae alias dolores ex expedita quaerat a in et.
-                        </p>
-                    </div>
-                </div>
+                        $counter++;
+                    } else {
+                        break;
+                    }
+                } ?>
             </div>
         </article>
     </section>
@@ -145,15 +140,16 @@ require_once("connect.php")
             </div>
         </div>
         <div class="discount-produce">
-            <div class="card-produce">
-                <img class="img-produce" src="/img/domestiques/105843.png" alt="Animated Card-produce Hover Effect Html & CSS">
-                <div class="intro-produce">
-                    <h1 class="text-h1">Smileur</h1>
-                    <p class="text-p">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rerum laudantium, ad deserunt quibusdam corrupti aut, recusandae alias dolores ex expedita quaerat a in et.
-                    </p>
-                </div>
+            <div class="card-produce"><a href="detail.php" class="txt-deco">
+                    <img class="img-produce" src="/img/domestiques/105843.png" alt="Animated Card-produce Hover Effect Html & CSS">
+                    <div class="intro-produce">
+                        <h4 class="text-h4">Smileur</h4>
+                        <p class="text-p">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rerum laudantium, ad deserunt quibusdam corrupti aut, recusandae alias dolores ex expedita quaerat a in et.
+                        </p>
+                </a>
             </div>
+        </div>
         </div>
     </section>
     <script src="/js/script.js"></script>
